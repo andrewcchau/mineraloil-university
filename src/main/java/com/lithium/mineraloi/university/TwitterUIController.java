@@ -3,15 +3,11 @@ package com.lithium.mineraloi.university;
 import com.lithium.mineraloil.selenium.elements.BaseElement;
 import org.openqa.selenium.By;
 
-public class ExampleController {
-    private ExampleView view;
+public class TwitterUIController {
+    private TwitterUIView view;
 
-    public ExampleController() {
-        view = new ExampleView();
-    }
-
-    public String getInputText() {
-        return view.getFilterBox().getText();
+    public TwitterUIController() {
+        view = new TwitterUIView();
     }
 
     public void filterSearch(String text) {

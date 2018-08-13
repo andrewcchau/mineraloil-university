@@ -6,10 +6,10 @@ import com.lithium.mineraloil.selenium.elements.Driver;
 import com.lithium.mineraloil.selenium.elements.TextElement;
 import org.openqa.selenium.By;
 
-public class ExampleView {
+public class TwitterUIView {
     private Driver driver;
 
-    public ExampleView() {
+    public TwitterUIView() {
         driver = DriverManager.INSTANCE.getDriver();
     }
 

@@ -1,9 +1,10 @@
 package com.lithium.mineraloil.university;
 
-import com.lithium.mineraloi.university.ExampleController;
+import com.lithium.mineraloi.university.TwitterUIController;
 import com.lithium.mineraloi.university.browser.BaseUITest;
 import com.lithium.mineraloil.selenium.elements.BaseElement;
 import org.assertj.core.api.Assertions;
+import org.awaitility.Awaitility;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
@@ -15,7 +16,7 @@ public class UITest extends BaseUITest {
     @DisplayName("Button Clicks: No Error Messages")
     @Test
     void testTwitterConnectionPresent() {
-        ExampleController timeline = new ExampleController();
+        TwitterUIController timeline = new TwitterUIController();
         timeline.clickHomeTimelineButton();
         timeline.clickUserTimelineButton();
         Assertions.assertThat(timeline.checkErrorMessage()).isEqualTo(false);
@@ -25,7 +26,7 @@ public class UITest extends BaseUITest {
     @Test
     void filterJibberishTest() {
         String text = "abcdefghikslasdkalsjdal;ksjawasdaw awdasdwq";
-        ExampleController homeTL = new ExampleController();
+        TwitterUIController homeTL = new TwitterUIController();
         homeTL.filterSearch(text);
         BaseElement homeTLError = homeTL.getHomeTLError();
         Assertions.assertThat(homeTLError.isDisplayed()).isEqualTo(true);
@@ -36,22 +37,17 @@ public class UITest extends BaseUITest {
     @DisplayName("Filter Test: Use 1st result of home timeline")
     @Test
     void filterProperText() {
-        try{
-            ExampleController homeTL = new ExampleController();
+        TwitterUIController homeTL = new TwitterUIController();
+        homeTL.clickHomeTimelineButton();
 
-            /* Built in sleep to ensure page loads */
-            TimeUnit.SECONDS.sleep(1);
+        Awaitility.await().atMost(2, TimeUnit.SECONDS).until(() -> !homeTL.getHomeTLError().isDisplayed());
 
-            String data = homeTL.getHomeTLString();
-            String[] dataArray = data.split("\n");
-            homeTL.filterSearch(dataArray[3]);
-            String resultingText = homeTL.getHomeTLElement().createBaseElement(By.xpath("//a[@class='messageText']")).getInnerText();
+        String data = homeTL.getHomeTLString();
+        String[] dataArray = data.split("\n");
+        homeTL.filterSearch(dataArray[3]);
+        String resultingText = homeTL.getHomeTLElement().createBaseElement(By.xpath("//a[@class='messageText']")).getInnerText();
 
-            Assertions.assertThat(homeTL.checkErrorMessage()).isEqualTo(false);
-            Assertions.assertThat(resultingText).isEqualTo(dataArray[3]);
-        } catch(Exception e) {
-            e.printStackTrace();
-            Assertions.fail("Exception caught");
-        }
+        Assertions.assertThat(homeTL.checkErrorMessage()).isEqualTo(false);
+        Assertions.assertThat(resultingText).isEqualTo(dataArray[3]);
     }
 }

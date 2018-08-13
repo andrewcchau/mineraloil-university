@@ -13,11 +13,27 @@ public class ExampleView {
         driver = DriverManager.INSTANCE.getDriver();
     }
 
-    public BaseElement getSomeElement() {
-        return driver.createBaseElement(By.xpath("//div[@class='someClass']"));
+    public BaseElement getFilterButton() {
+        return driver.createBaseElement(By.xpath("//button[@class='filterButton']"));
     }
 
-    public TextElement getTextElement() {
+    public TextElement getFilterBox() {
         return driver.createTextElement(By.xpath("//input[@class='textInput']"));
+    }
+
+    public BaseElement getHomeTimelineDiv() {
+        return driver.createBaseElement(By.xpath("//div[@class='dataHome']"));
+    }
+
+    public BaseElement getHomeTimelineButton() {
+        return driver.createBaseElement(By.xpath("//button[@class='homeTimelineButton']"));
+    }
+
+    public BaseElement getUserTimelineDiv() {
+        return driver.createBaseElement(By.xpath("//div[@class='userHome']"));
+    }
+
+    public BaseElement getUserTimelineButton() {
+        return driver.createBaseElement(By.xpath("//button[@class='userTimelineButton']"));
     }
 }

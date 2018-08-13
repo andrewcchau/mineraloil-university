@@ -8,12 +8,13 @@ import org.junit.jupiter.api.Test;
 
 public class ExampleTest extends BaseUITest {
 
-    @DisplayName("When something is inputted, then the this should pop up")
+    @DisplayName("When something is inputted, then this should pop up")
     @Test
     void exampleTest() {
+        String text = "Hello World";
         ExampleController example = new ExampleController();
-        example.doSomething();
-        Assertions.assertThat(example.getInputText()).isEqualTo("Hello World");
+        example.filterSearch(text);
+        Assertions.assertThat(example.getInputText()).isEqualTo(text);
     }
 
 }

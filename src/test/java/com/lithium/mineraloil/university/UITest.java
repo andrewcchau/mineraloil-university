@@ -27,7 +27,7 @@ public class UITest extends BaseUITest {
         String text = "abcdefghikslasdkalsjdal;ksjawasdaw awdasdwq";
         ExampleController homeTL = new ExampleController();
         homeTL.filterSearch(text);
-        BaseElement homeTLError = homeTL.getHomeTLElement().createBaseElement(By.xpath("//div[@class='errorMessage']"));
+        BaseElement homeTLError = homeTL.getHomeTLError();
         Assertions.assertThat(homeTLError.isDisplayed()).isEqualTo(true);
         Assertions.assertThat(homeTL.getHomeTLString()).isEqualTo("No tweets match your search query.");
 

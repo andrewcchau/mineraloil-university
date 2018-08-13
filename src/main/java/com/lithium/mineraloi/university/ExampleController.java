@@ -19,12 +19,17 @@ public class ExampleController {
         view.getFilterButton().click();
     }
 
-    public boolean checkErrorMessage() {
-        BaseElement homeTLError = view.getHomeTimelineDiv()
-                                        .createBaseElement(By.xpath("//div[@class='errorMessage']"));
+    public BaseElement getHomeTLError() {
+        return view.getHomeTimelineDiv().createBaseElement(By.xpath("//div[@class='errorMessage']"));
+    }
 
-        BaseElement userTLError = view.getUserTimelineDiv()
-                                        .createBaseElement(By.xpath("//div[@class='errorMessage']"));
+    public BaseElement getUserTLError() {
+        return view.getUserTimelineDiv().createBaseElement(By.xpath("//div[@class='errorMessage']"));
+    }
+
+    public boolean checkErrorMessage() {
+        BaseElement homeTLError = getHomeTLError();
+        BaseElement userTLError = getUserTLError();
 
         if(userTLError.isDisplayed() || homeTLError.isDisplayed()) {
             return true;

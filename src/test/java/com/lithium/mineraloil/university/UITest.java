@@ -51,7 +51,7 @@ public class UITest extends BaseUITest {
         TwitterUIController timeline = new TwitterUIController();
         timeline.clickHomeTimelineTab();
 
-        Awaitility.await().atMost(2, TimeUnit.SECONDS).until(() -> !timeline.getHomeTLError().isDisplayed());
+        Awaitility.await().atMost(5, TimeUnit.SECONDS).until(() -> !timeline.getHomeTLError().isDisplayed());
 
         String data = timeline.getHomeTLString();
         String[] dataArray = data.split("\n");

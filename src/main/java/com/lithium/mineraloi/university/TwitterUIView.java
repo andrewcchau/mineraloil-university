@@ -56,9 +56,10 @@ public class TwitterUIView {
         return driver.createBaseElement(By.xpath("//button[@class='userTimelineButton']"));
     }
 
+
     /* Post Tweet Items */
     public BaseElement getPostTweetWrapper() {
-        return driver.createBaseElement(By.xpath("//span[@class='postButtonWrapper']"));
+        return driver.createBaseElement(By.xpath("//div[@class='postButtonWrapper']"));
     }
 
     public TextElement getPostTweetTextArea() {

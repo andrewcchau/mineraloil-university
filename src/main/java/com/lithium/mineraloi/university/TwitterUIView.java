@@ -62,7 +62,7 @@ public class TwitterUIView {
     }
 
     public TextElement getPostTweetTextArea() {
-        return driver.createTextElement(By.xpath("//textarea[@class='postTextBox']"));
+        return driver.createTextElement(By.xpath("//textarea[@class='postTextArea']"));
     }
 
     public BaseElement getPostTweetButton() {

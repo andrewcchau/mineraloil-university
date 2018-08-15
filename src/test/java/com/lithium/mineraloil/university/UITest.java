@@ -64,7 +64,7 @@ public class UITest extends BaseUITest {
 
     @DisplayName("Post Test: Post Tweet Works")
     @Test
-    void testPostTweetTab() {
+    void testPostTweet() {
         TwitterUIController timeline = new TwitterUIController();
 
         /* Store a string for post tweet usage */
@@ -94,6 +94,9 @@ public class UITest extends BaseUITest {
         /* Go Back to USer Timeline and verify */
         timeline.clickUserTimelineTab();
         timeline.clickUserTimelineButton();
+
+        Awaitility.await().atMost(5, TimeUnit.SECONDS).until(() -> !timeline.getUserTLString().equals("Pending . . ."));
+
         data = timeline.getUserTLString();
         dataArray = data.split("\n");
         assertThat(dataArray[2]).isEqualTo(message);

@@ -47,7 +47,7 @@ public class UITest extends BaseUITest {
         Awaitility.await().atMost(5, TimeUnit.SECONDS).until(() -> !timeline.getHomeTLError().isDisplayed());
 
         timeline.filterSearch(text);
-        BaseElement timelineError = timeline.getHomeTLError();
+        BaseElement timelineError = timeline.getHomeTLSearchError();
         assertThat(timelineError.isDisplayed()).isEqualTo(true);
         assertThat(timeline.getHomeTLString()).isEqualTo("No tweets match your search query.");
 

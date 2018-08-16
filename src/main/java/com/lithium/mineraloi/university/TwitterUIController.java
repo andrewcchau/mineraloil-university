@@ -65,6 +65,10 @@ public class TwitterUIController {
         view.getFilterButton().click();
     }
 
+    public BaseElement getHomeTLSearchError() {
+        return view.getHomeTimelineDiv().createBaseElement(By.xpath("//div[@class='resultNoneMessage']"));
+    }
+
 
     /* User Timeline Methods */
     public void clickUserTimelineButton() {

@@ -13,6 +13,8 @@ import java.util.concurrent.TimeUnit;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class UITest extends BaseUITest {
+    private static final int WAIT_TIME = 20;
+
     @DisplayName("Home Timeline Button Click: No Error Messages")
     @Test
     void testTwitterConnectionPresentHomeTimeline() {
@@ -20,7 +22,7 @@ public class UITest extends BaseUITest {
         timeline.clickHomeTimelineTab();
         timeline.clickHomeTimelineButton();
 
-        Awaitility.await().atMost(5, TimeUnit.SECONDS).until(() -> !timeline.getHomeTLError().isDisplayed());
+        Awaitility.await().atMost(WAIT_TIME, TimeUnit.SECONDS).until(() -> timeline.getHomeTLItem().isDisplayed());
 
         assertThat(timeline.checkErrorMessage(TwitterUIController.UI_Select.HOME)).isEqualTo(false);
     }
@@ -32,7 +34,7 @@ public class UITest extends BaseUITest {
         timeline.clickUserTimelineTab();
         timeline.clickUserTimelineButton();
 
-        Awaitility.await().atMost(5, TimeUnit.SECONDS).until(() -> !timeline.getUserTLError().isDisplayed());
+        Awaitility.await().atMost(WAIT_TIME, TimeUnit.SECONDS).until(() -> timeline.getUserTLItem().isDisplayed());
 
         assertThat(timeline.checkErrorMessage(TwitterUIController.UI_Select.USER)).isEqualTo(false);
     }
@@ -44,7 +46,7 @@ public class UITest extends BaseUITest {
         TwitterUIController timeline = new TwitterUIController();
         timeline.clickHomeTimelineTab();
 
-        Awaitility.await().atMost(5, TimeUnit.SECONDS).until(() -> !timeline.getHomeTLError().isDisplayed());
+        Awaitility.await().atMost(WAIT_TIME, TimeUnit.SECONDS).until(() -> timeline.getHomeTLItem().isDisplayed());
 
         timeline.filterSearch(text);
         BaseElement timelineError = timeline.getHomeTLSearchError();
@@ -59,15 +61,16 @@ public class UITest extends BaseUITest {
         TwitterUIController timeline = new TwitterUIController();
         timeline.clickHomeTimelineTab();
 
-        Awaitility.await().atMost(5, TimeUnit.SECONDS).until(() -> !timeline.getHomeTLError().isDisplayed());
+        Awaitility.await().atMost(WAIT_TIME, TimeUnit.SECONDS).until(() -> timeline.getHomeTLItem().isDisplayed());
 
         String data = timeline.getHomeTLString();
         String[] dataArray = data.split("\n");
-        timeline.filterSearch(dataArray[3]);
+        String message = dataArray[3];
+        timeline.filterSearch(message);
         String resultingText = timeline.getHomeMessageText().getInnerText();
 
         assertThat(timeline.checkErrorMessage(TwitterUIController.UI_Select.HOME)).isEqualTo(false);
-        assertThat(resultingText).isEqualTo(dataArray[3]);
+        assertThat(resultingText).isEqualTo(message);
     }
 
     @DisplayName("Post Test: Post Tweet Works")
@@ -79,7 +82,7 @@ public class UITest extends BaseUITest {
         timeline.clickUserTimelineTab();
         timeline.clickUserTimelineButton();
 
-        Awaitility.await().atMost(10, TimeUnit.SECONDS).until(() -> !timeline.getHomeTLError().isDisplayed());
+        Awaitility.await().atMost(WAIT_TIME, TimeUnit.SECONDS).until(() -> timeline.getUserTLItem().isDisplayed());
 
         String data = timeline.getUserTLString();
         String[] dataArray = data.split("\n");
@@ -99,13 +102,13 @@ public class UITest extends BaseUITest {
         timeline.postTweet(message);
 
         /* Check that it was successful */
-        Awaitility.await().atMost(10, TimeUnit.SECONDS).until(() -> timeline.getPostTweetSuccessMessage().isDisplayed());
+        Awaitility.await().atMost(WAIT_TIME, TimeUnit.SECONDS).until(() -> timeline.getPostTweetSuccessMessage().isDisplayed());
 
         /* Go Back to USer Timeline and verify */
         timeline.clickUserTimelineTab();
         timeline.clickUserTimelineButton();
 
-        Awaitility.await().atMost(10, TimeUnit.SECONDS).until(() -> !timeline.getUserTLString().equals("Pending . . ."));
+        Awaitility.await().atMost(WAIT_TIME, TimeUnit.SECONDS).until(() -> timeline.getUserTLItem().isDisplayed());
 
         data = timeline.getUserTLString();
         dataArray = data.split("\n");

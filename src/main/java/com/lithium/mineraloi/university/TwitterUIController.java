@@ -69,6 +69,10 @@ public class TwitterUIController {
         return view.getHomeTimelineDiv().createBaseElement(By.xpath("//div[@class='resultNoneMessage']"));
     }
 
+    public BaseElement getHomeTLItem() {
+        return view.getHomeTimelineDiv().createBaseElement(By.xpath("//div[@class='item']"));
+    }
+
 
     /* User Timeline Methods */
     public void clickUserTimelineButton() {
@@ -86,6 +90,9 @@ public class TwitterUIController {
         return view.getUserTimelineDiv().getInnerText();
     }
 
+    public BaseElement getUserTLItem() {
+        return view.getUserTimelineDiv().createBaseElement(By.xpath("//div[@class='item']"));
+    }
 
     /* Post Tweet Methods */
     public BaseElement getPostTweetErrorMessage() {

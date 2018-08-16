@@ -71,6 +71,8 @@ public class UITest extends BaseUITest {
         timeline.clickUserTimelineTab();
         timeline.clickUserTimelineButton();
 
+        Awaitility.await().atMost(5, TimeUnit.SECONDS).until(() -> !timeline.getHomeTLError().isDisplayed());
+
         String data = timeline.getUserTLString();
         String[] dataArray = data.split("\n");
 

@@ -19,6 +19,9 @@ public class UITest extends BaseUITest {
         TwitterUIController timeline = new TwitterUIController();
         timeline.clickHomeTimelineTab();
         timeline.clickHomeTimelineButton();
+
+        Awaitility.await().atMost(5, TimeUnit.SECONDS).until(() -> !timeline.getHomeTLError().isDisplayed());
+
         assertThat(timeline.checkErrorMessage(TwitterUIController.UI_Select.HOME)).isEqualTo(false);
     }
 
@@ -29,6 +32,8 @@ public class UITest extends BaseUITest {
         timeline.clickUserTimelineTab();
         timeline.clickUserTimelineButton();
 
+        Awaitility.await().atMost(5, TimeUnit.SECONDS).until(() -> !timeline.getUserTLError().isDisplayed());
+
         assertThat(timeline.checkErrorMessage(TwitterUIController.UI_Select.USER)).isEqualTo(false);
     }
 
@@ -38,6 +43,9 @@ public class UITest extends BaseUITest {
         String text = "abcdefghikslasdkalsjdal;ksjawasdaw awdasdwq";
         TwitterUIController timeline = new TwitterUIController();
         timeline.clickHomeTimelineTab();
+
+        Awaitility.await().atMost(5, TimeUnit.SECONDS).until(() -> !timeline.getHomeTLError().isDisplayed());
+
         timeline.filterSearch(text);
         BaseElement timelineError = timeline.getHomeTLError();
         assertThat(timelineError.isDisplayed()).isEqualTo(true);
@@ -71,7 +79,7 @@ public class UITest extends BaseUITest {
         timeline.clickUserTimelineTab();
         timeline.clickUserTimelineButton();
 
-        Awaitility.await().atMost(5, TimeUnit.SECONDS).until(() -> !timeline.getHomeTLError().isDisplayed());
+        Awaitility.await().atMost(10, TimeUnit.SECONDS).until(() -> !timeline.getHomeTLError().isDisplayed());
 
         String data = timeline.getUserTLString();
         String[] dataArray = data.split("\n");
@@ -91,13 +99,13 @@ public class UITest extends BaseUITest {
         timeline.postTweet(message);
 
         /* Check that it was successful */
-        Awaitility.await().atMost(5, TimeUnit.SECONDS).until(() -> timeline.getPostTweetSuccessMessage().isDisplayed());
+        Awaitility.await().atMost(10, TimeUnit.SECONDS).until(() -> timeline.getPostTweetSuccessMessage().isDisplayed());
 
         /* Go Back to USer Timeline and verify */
         timeline.clickUserTimelineTab();
         timeline.clickUserTimelineButton();
 
-        Awaitility.await().atMost(5, TimeUnit.SECONDS).until(() -> !timeline.getUserTLString().equals("Pending . . ."));
+        Awaitility.await().atMost(10, TimeUnit.SECONDS).until(() -> !timeline.getUserTLString().equals("Pending . . ."));
 
         data = timeline.getUserTLString();
         dataArray = data.split("\n");

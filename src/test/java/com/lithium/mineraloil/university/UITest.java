@@ -39,7 +39,7 @@ public class UITest extends BaseUITest {
         assertThat(timeline.checkErrorMessage(TwitterUIController.UI_Select.USER)).isEqualTo(false);
     }
 
-    @DisplayName("Filter Test: Jibberish should return error message")
+    @DisplayName("Filter Test: Gibberish should return error message")
     @Test
     void filterJibberishTest() {
         String text = "abcdefghikslasdkalsjdal;ksjawasdaw awdasdwq";

@@ -22,7 +22,7 @@ public class UITest extends BaseUITest {
         timeline.clickHomeTimelineTab();
         timeline.clickHomeTimelineButton();
 
-        Awaitility.await().atMost(WAIT_TIME, TimeUnit.SECONDS).until(() -> timeline.getHomeTLItem().isDisplayed());
+        Awaitility.await().atMost(WAIT_TIME, TimeUnit.SECONDS).until(() -> timeline.getHomeTLTweet().isDisplayed());
 
         assertThat(timeline.checkErrorMessage(TwitterUIController.UI_Select.HOME)).isEqualTo(false);
     }
@@ -34,7 +34,7 @@ public class UITest extends BaseUITest {
         timeline.clickUserTimelineTab();
         timeline.clickUserTimelineButton();
 
-        Awaitility.await().atMost(WAIT_TIME, TimeUnit.SECONDS).until(() -> timeline.getUserTLItem().isDisplayed());
+        Awaitility.await().atMost(WAIT_TIME, TimeUnit.SECONDS).until(() -> timeline.getUserTLTweet().isDisplayed());
 
         assertThat(timeline.checkErrorMessage(TwitterUIController.UI_Select.USER)).isEqualTo(false);
     }
@@ -46,7 +46,7 @@ public class UITest extends BaseUITest {
         TwitterUIController timeline = new TwitterUIController();
         timeline.clickHomeTimelineTab();
 
-        Awaitility.await().atMost(WAIT_TIME, TimeUnit.SECONDS).until(() -> timeline.getHomeTLItem().isDisplayed());
+        Awaitility.await().atMost(WAIT_TIME, TimeUnit.SECONDS).until(() -> timeline.getHomeTLTweet().isDisplayed());
 
         timeline.filterSearch(text);
         BaseElement timelineError = timeline.getHomeTLSearchError();
@@ -61,7 +61,7 @@ public class UITest extends BaseUITest {
         TwitterUIController timeline = new TwitterUIController();
         timeline.clickHomeTimelineTab();
 
-        Awaitility.await().atMost(WAIT_TIME, TimeUnit.SECONDS).until(() -> timeline.getHomeTLItem().isDisplayed());
+        Awaitility.await().atMost(WAIT_TIME, TimeUnit.SECONDS).until(() -> timeline.getHomeTLTweet().isDisplayed());
 
         String data = timeline.getHomeTLString();
         String[] dataArray = data.split("\n");
@@ -82,7 +82,7 @@ public class UITest extends BaseUITest {
         timeline.clickUserTimelineTab();
         timeline.clickUserTimelineButton();
 
-        Awaitility.await().atMost(WAIT_TIME, TimeUnit.SECONDS).until(() -> timeline.getUserTLItem().isDisplayed());
+        Awaitility.await().atMost(WAIT_TIME, TimeUnit.SECONDS).until(() -> timeline.getUserTLTweet().isDisplayed());
 
         String data = timeline.getUserTLString();
         String[] dataArray = data.split("\n");
@@ -108,7 +108,7 @@ public class UITest extends BaseUITest {
         timeline.clickUserTimelineTab();
         timeline.clickUserTimelineButton();
 
-        Awaitility.await().atMost(WAIT_TIME, TimeUnit.SECONDS).until(() -> timeline.getUserTLItem().isDisplayed());
+        Awaitility.await().atMost(WAIT_TIME, TimeUnit.SECONDS).until(() -> timeline.getUserTLTweet().isDisplayed());
 
         data = timeline.getUserTLString();
         dataArray = data.split("\n");

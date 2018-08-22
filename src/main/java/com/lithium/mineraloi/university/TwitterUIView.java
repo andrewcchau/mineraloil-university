@@ -67,6 +67,6 @@ public class TwitterUIView {
     }
 
     public BaseElement getPostTweetButton() {
-        return driver.createBaseElement(By.xpath("//button[@class='postButton']"));
+        return driver.createBaseElement(By.xpath("//button[@class='postButton active']"));
     }
 }
